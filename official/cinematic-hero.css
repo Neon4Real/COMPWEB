@@ -3,6 +3,8 @@ body {
   --ambient-b: #ff3158;
 }
 
+html { scroll-padding-top: 72px; }
+
 body[data-ambient="phones"] { --ambient-a: #4176ff; --ambient-b: #a052ff; }
 body[data-ambient="gaming"] { --ambient-a: #43ff8b; --ambient-b: #ff294d; }
 body[data-ambient="repair"] { --ambient-a: #ff8a3d; --ambient-b: #ffd36a; }
@@ -27,7 +29,7 @@ body[data-ambient="locations"] { --ambient-a: #ff7b48; --ambient-b: #ffcf8c; }
   border-radius: 50%;
   filter: blur(125px);
   opacity: .065;
-  transition: background-color 1.2s ease, transform 1.4s ease;
+  transition: background-color .7s ease, transform .9s ease;
 }
 
 .ambient-orb:first-child {
@@ -82,7 +84,7 @@ body[data-ambient="locations"] { --ambient-a: #ff7b48; --ambient-b: #ffcf8c; }
   filter: none !important;
   opacity: .34;
   pointer-events: none;
-  animation: scan-flicker 7s steps(1) infinite;
+  animation: none;
 }
 
 .cinematic-video,
@@ -98,8 +100,9 @@ body[data-ambient="locations"] { --ambient-a: #ff7b48; --ambient-b: #ffcf8c; }
   z-index: 0;
   opacity: 0;
   filter: brightness(.48) saturate(1.35) contrast(1.14);
-  transform: scale(1.025);
+  transform: translate3d(0, calc(var(--hero-scroll, 0) * 46px), 0) scale(1.06);
   transition: opacity .9s ease;
+  will-change: transform, opacity;
 }
 
 .cinematic-hero.video-ready .cinematic-video { opacity: 1; }
@@ -224,6 +227,9 @@ body[data-ambient="locations"] { --ambient-a: #ff7b48; --ambient-b: #ffcf8c; }
   align-items: center;
   width: min(100%, 1100px);
   text-align: center;
+  opacity: calc(1 - var(--hero-scroll, 0) * .76);
+  transform: translate3d(0, calc(var(--hero-scroll, 0) * -22px), 0);
+  will-change: transform, opacity;
 }
 
 .esports-kicker {
@@ -306,6 +312,25 @@ body[data-ambient="locations"] { --ambient-a: #ff7b48; --ambient-b: #ffcf8c; }
   font-weight: 710;
   line-height: .88;
   text-shadow: 0 18px 55px #000;
+}
+
+.cinematic-title {
+  position: relative;
+  max-width: 1000px;
+  margin: 0;
+  color: #fff;
+  letter-spacing: -.072em;
+  text-wrap: balance;
+  font-size: clamp(58px, 8vw, 118px);
+  font-weight: 710;
+  line-height: .88;
+  text-shadow: 0 18px 55px #000;
+}
+
+.cinematic-title span {
+  display: block;
+  color: #aeb5b0;
+  font-weight: 520;
 }
 
 .glitch-title span {
@@ -475,6 +500,7 @@ body[data-ambient="locations"] { --ambient-a: #ff7b48; --ambient-b: #ffcf8c; }
   .lw-symbol { width: 52px; height: 52px; border-radius: 15px; font-size: 16px; }
   .hero-liveworld-logo strong { font-size: 26px; }
   .glitch-title { font-size: clamp(51px, 15vw, 72px); }
+  .cinematic-title { font-size: clamp(51px, 15vw, 72px); }
   .hero-system-copy { max-width: 440px; font-size: 11px; }
   .gaming-brand-lockup { gap: 7px; margin-top: 27px; }
   .gaming-brand { min-width: 98px; height: 38px; padding: 0 12px; font-size: 9px; }
@@ -494,6 +520,7 @@ body[data-ambient="locations"] { --ambient-a: #ff7b48; --ambient-b: #ffcf8c; }
 
 @media (prefers-reduced-motion: reduce) {
   .cinematic-video { display: none; }
+  .cinematic-content { opacity: 1 !important; transform: none !important; }
   .glitch-title::before,
   .glitch-title::after,
   .gaming-light,
