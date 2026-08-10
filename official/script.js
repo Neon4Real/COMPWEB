@@ -198,8 +198,9 @@ document.querySelector('.menu-toggle')?.addEventListener('click',()=>document.qu
 fetch('https://api.counterapi.dev/v1/live-world-electronics/github-official/up')
   .then(response=>response.json())
   .then(data=>{
-    const counter=document.querySelector('#view-count');
-    if(counter&&data.count)counter.textContent=data.count.toLocaleString();
+    const counter=document.querySelector('.site-view-count > span');
+    const count=Number(data.count);
+    if(counter&&Number.isFinite(count))counter.textContent=count.toLocaleString();
   })
   .catch(()=>{});
 
