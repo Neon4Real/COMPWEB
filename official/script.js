@@ -5,7 +5,7 @@ if(originalHero){
   originalHero.style.setProperty('--hero-poster',`url("${poster}")`);
   originalHero.innerHTML=`
     <video class="cinematic-video" autoplay muted loop playsinline preload="metadata" aria-hidden="true">
-      <source src="https://assets.mixkit.co/videos/43541/43541-720.mp4" type="video/mp4">
+      <source src="https://assets.mixkit.co/videos/41638/41638-720.mp4" type="video/mp4">
     </video>
     <div class="gaming-grid" aria-hidden="true"></div>
     <div class="gaming-light green" aria-hidden="true"></div>
