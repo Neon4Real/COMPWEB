@@ -144,6 +144,78 @@ body[data-ambient="locations"] { --ambient-a: #ff7b48; --ambient-b: #ffcf8c; }
   animation: gaming-light-right 10s ease-in-out infinite alternate;
 }
 
+.video-brand-sequence {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.video-brand-logo {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  gap: 17px;
+  color: #fff;
+  opacity: 0;
+  mix-blend-mode: screen;
+  filter: drop-shadow(0 0 18px currentColor);
+  animation: video-brand-ghost 16s linear infinite;
+}
+
+.video-brand-logo::after {
+  content: "";
+  position: absolute;
+  top: -12px;
+  left: -15%;
+  width: 130%;
+  height: 1px;
+  background: currentColor;
+  box-shadow: 0 0 18px currentColor;
+  opacity: .6;
+  animation: video-logo-scan 4s linear infinite;
+}
+
+.video-brand-logo svg {
+  width: clamp(52px, 5vw, 78px);
+  height: clamp(52px, 5vw, 78px);
+  fill: currentColor;
+}
+
+.video-brand-logo b {
+  letter-spacing: .08em;
+  font-size: clamp(27px, 3.1vw, 47px);
+  font-weight: 850;
+}
+
+.video-brand-logo.razer {
+  top: 22%;
+  left: 6%;
+  color: #53ff79;
+}
+
+.video-brand-logo.valorant {
+  top: 25%;
+  right: 6%;
+  color: #ff4965;
+  animation-delay: 4s;
+}
+
+.video-brand-logo.intel {
+  bottom: 18%;
+  left: 8%;
+  color: #65baff;
+  animation-delay: 8s;
+}
+
+.video-brand-logo.amd {
+  right: 8%;
+  bottom: 18%;
+  color: #ff725f;
+  animation-delay: 12s;
+}
+
 .cinematic-content {
   position: relative;
   z-index: 5;
@@ -380,6 +452,17 @@ body[data-ambient="locations"] { --ambient-a: #ff7b48; --ambient-b: #ffcf8c; }
 @keyframes ambient-drift-a { to { transform: translate(18vw, 8vh) scale(1.08); } }
 @keyframes ambient-drift-b { to { transform: translate(-15vw, -10vh) scale(1.12); } }
 @keyframes scroll-line { 0%, 100% { opacity: .25; transform: scaleY(.45); transform-origin: top; } 50% { opacity: 1; transform: scaleY(1); } }
+@keyframes video-brand-ghost {
+  0%, 3%, 25%, 100% { opacity: 0; transform: translateY(18px) scale(.96); clip-path: inset(0); }
+  5% { opacity: .09; transform: translate(-7px, 8px) scale(.98); clip-path: inset(52% 0 28%); }
+  7% { opacity: .34; transform: translateY(0) scale(1); clip-path: inset(0); }
+  13% { opacity: .2; transform: translate(2px, -2px) scale(1.015); }
+  16% { opacity: .42; transform: translate(-3px, 1px) scale(1.02); clip-path: inset(17% 0 13%); }
+  17% { opacity: .2; clip-path: inset(0); }
+  21% { opacity: .12; transform: translateY(-12px) scale(1.04); }
+  23% { opacity: 0; transform: translateY(-20px) scale(1.05); }
+}
+@keyframes video-logo-scan { from { transform: translateY(0); } to { transform: translateY(105px); } }
 
 @media (max-width: 720px) {
   .cinematic-hero {
@@ -395,6 +478,15 @@ body[data-ambient="locations"] { --ambient-a: #ff7b48; --ambient-b: #ffcf8c; }
   .hero-system-copy { max-width: 440px; font-size: 11px; }
   .gaming-brand-lockup { gap: 7px; margin-top: 27px; }
   .gaming-brand { min-width: 98px; height: 38px; padding: 0 12px; font-size: 9px; }
+  .video-brand-logo {
+    top: auto !important;
+    right: 0 !important;
+    bottom: 138px !important;
+    left: 0 !important;
+    justify-content: center;
+  }
+  .video-brand-logo svg { width: 42px; height: 42px; }
+  .video-brand-logo b { font-size: 25px; }
   .cinematic-actions { width: 100%; }
   .cinematic-actions a { width: min(100%, 330px); }
   .ambient-orb { width: 100vw; opacity: .05; }
@@ -407,4 +499,8 @@ body[data-ambient="locations"] { --ambient-a: #ff7b48; --ambient-b: #ffcf8c; }
   .gaming-light,
   .hero-scroll-cue i,
   .ambient-orb { animation: none !important; }
+  .video-brand-logo { animation: none !important; }
 }
+
+.map-card iframe { transition: opacity .24s ease, filter .24s ease; }
+.map-card.is-switching iframe { opacity: .5; filter: saturate(.45) blur(1px); }
