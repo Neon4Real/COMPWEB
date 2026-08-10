@@ -74,6 +74,22 @@ const branchMap=document.querySelector('.map-card iframe');
 const branchMapCard=document.querySelector('.map-card');
 const visitHeading=document.querySelector('.visit-copy h2');
 const visitAddress=document.querySelector('.visit-copy address');
+if(branchMapCard&&branchMap){
+  branchMapCard.classList.add('map-embedded','is-switching');
+  branchMapCard.insertAdjacentHTML('afterbegin',`
+    <div class="map-identity" aria-hidden="true">
+      <span class="map-pin">LW</span>
+      <span><small>LIVE WORLD · DUBAI</small><strong data-map-branch>Muhaisnah 4</strong></span>
+    </div>
+    <div class="map-loading" role="status" aria-live="polite">
+      <span class="map-loader-mark">LW</span>
+      <strong>Loading location</strong>
+      <small data-map-loading-label>Muhaisnah 4</small>
+      <i aria-hidden="true"></i>
+    </div>`);
+}
+const mapBranchLabel=branchMapCard?.querySelector('[data-map-branch]');
+const mapLoadingLabel=branchMapCard?.querySelector('[data-map-loading-label]');
 const branchLocations=[
   {
     name:'Muhaisnah 4',
@@ -112,6 +128,8 @@ const selectBranch=index=>{
   });
   visitHeading.innerHTML=`${branch.name},<br>Dubai.`;
   visitAddress.innerHTML=branch.address.join('<br>');
+  if(mapBranchLabel)mapBranchLabel.textContent=branch.name;
+  if(mapLoadingLabel)mapLoadingLabel.textContent=branch.name;
   branchMap.title=`Google Map showing ${branch.name} branch`;
   branchMapCard.classList.add('is-switching');
   branchMap.src=`https://www.google.com/maps?q=${encodeURIComponent(branch.query)}&output=embed`;
