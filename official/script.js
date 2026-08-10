@@ -195,11 +195,11 @@ form?.addEventListener('submit',event=>{
 
 document.querySelector('.menu-toggle')?.addEventListener('click',()=>document.querySelector('nav')?.scrollIntoView({behavior:'smooth'}));
 
-fetch('https://api.counterapi.dev/v1/live-world-electronics/github-official/up')
+fetch('https://countapi.mileshilliard.com/api/v1/hit/liveworldhub-github-pages-official-2026')
   .then(response=>response.json())
   .then(data=>{
     const counter=document.querySelector('.site-view-count > span');
-    const count=Number(data.count);
+    const count=Number(data.value);
     if(counter&&Number.isFinite(count))counter.textContent=count.toLocaleString();
   })
   .catch(()=>{});
