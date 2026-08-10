@@ -16,6 +16,12 @@ if(originalHero){
     <div class="gaming-grid" aria-hidden="true"></div>
     <div class="gaming-light green" aria-hidden="true"></div>
     <div class="gaming-light red" aria-hidden="true"></div>
+    <div class="video-brand-sequence" aria-label="Razer, Valorant, Intel and AMD">
+      <span class="video-brand-logo razer" aria-label="Razer">${razerLogo}<b>RAZER</b></span>
+      <span class="video-brand-logo valorant" aria-label="Valorant">${valorantLogo}<b>VALORANT</b></span>
+      <span class="video-brand-logo intel" aria-label="Intel">${intelLogo}<b>INTEL</b></span>
+      <span class="video-brand-logo amd" aria-label="AMD">${amdLogo}<b>AMD</b></span>
+    </div>
     <div class="cinematic-content">
       <p class="esports-kicker">Esports · custom gaming systems · Dubai</p>
       <div class="hero-liveworld-logo" aria-label="Live World Electronics Trading LLC">
@@ -24,12 +30,6 @@ if(originalHero){
       </div>
       <h1 class="glitch-title" data-text="UNLOCK YOUR DIGITAL DREAMS."><span>Unlock your</span>digital dreams.</h1>
       <p class="hero-system-copy">Competitive gaming PCs, performance laptops, esports peripherals and expert technical support—built around the way you play.</p>
-      <div class="gaming-brand-lockup" aria-label="Gaming and processor brands">
-        <span class="gaming-brand razer" aria-label="Razer">${razerLogo}<b>RAZER</b></span>
-        <span class="gaming-brand valorant" aria-label="Valorant">${valorantLogo}<b>VALORANT</b></span>
-        <span class="gaming-brand intel" aria-label="Intel">${intelLogo}<b>INTEL</b></span>
-        <span class="gaming-brand amd" aria-label="AMD">${amdLogo}<b>AMD</b></span>
-      </div>
       <div class="cinematic-actions">
         <a class="primary" href="https://wa.me/971559956683?text=Hello%20Live%20World%2C%20I%20would%20like%20to%20build%20or%20upgrade%20a%20gaming%20PC." target="_blank" rel="noreferrer">Build your system ↗</a>
         <a class="secondary" href="#products">Explore gaming &amp; technology</a>
@@ -79,6 +79,58 @@ const scheduleAmbient=()=>{
 window.addEventListener('scroll',scheduleAmbient,{passive:true});
 window.addEventListener('resize',scheduleAmbient,{passive:true});
 updateAmbient();
+
+const branchButtons=[...document.querySelectorAll('.branch-switcher button')];
+const branchMap=document.querySelector('.map-card iframe');
+const branchMapCard=document.querySelector('.map-card');
+const visitHeading=document.querySelector('.visit-copy h2');
+const visitAddress=document.querySelector('.visit-copy address');
+const branchLocations=[
+  {
+    name:'Muhaisnah 4',
+    address:['Shop No. 1, Mango Hypermarket Building','Muhaisnah 4, near Lulu Village','Dubai, UAE'],
+    query:'Live World Hub Electronics LLC Muhaisnah 4 Dubai'
+  },
+  {
+    name:'Al Warqaa 1',
+    address:['Q1 Mall, Al Warqaa 1 Street','Ground Floor','Dubai, UAE'],
+    query:'Live World Electronics Q1 Mall Al Warqaa 1 Dubai'
+  },
+  {
+    name:'Mirdif',
+    address:['Near Abaya Mall','Mirdif','Dubai, UAE'],
+    query:'Live World Electronics near Abaya Mall Mirdif Dubai'
+  },
+  {
+    name:'Oud Al Muteena',
+    address:['Emirates Co-operative Society','Oud Al Muteena 1','Dubai, UAE'],
+    query:'Live World Electronics Emirates Cooperative Society Oud Al Muteena 1 Dubai'
+  },
+  {
+    name:'Al Khawaneej',
+    address:['Live World Electronics','Al Khawaneej','Dubai, UAE'],
+    query:'Live World Electronics Al Khawaneej Dubai'
+  }
+];
+
+const selectBranch=index=>{
+  const branch=branchLocations[index];
+  if(!branch||!branchMap)return;
+  branchButtons.forEach((button,buttonIndex)=>{
+    const selected=buttonIndex===index;
+    button.classList.toggle('active',selected);
+    button.setAttribute('aria-pressed',String(selected));
+  });
+  visitHeading.innerHTML=`${branch.name},<br>Dubai.`;
+  visitAddress.innerHTML=branch.address.join('<br>');
+  branchMap.title=`Google Map showing ${branch.name} branch`;
+  branchMapCard.classList.add('is-switching');
+  branchMap.src=`https://www.google.com/maps?q=${encodeURIComponent(branch.query)}&output=embed`;
+};
+
+branchMap?.addEventListener('load',()=>branchMapCard.classList.remove('is-switching'));
+branchButtons.forEach((button,index)=>button.addEventListener('click',()=>selectBranch(index)));
+branchButtons.forEach((button,index)=>button.setAttribute('aria-pressed',String(index===0)));
 
 const form=document.querySelector('.concierge-form');
 const buttons=[...document.querySelectorAll('.form-tabs button')];
