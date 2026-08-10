@@ -75,7 +75,7 @@ const branchMapCard=document.querySelector('.map-card');
 const visitHeading=document.querySelector('.visit-copy h2');
 const visitAddress=document.querySelector('.visit-copy address');
 if(branchMapCard&&branchMap){
-  branchMapCard.classList.add('map-embedded','is-switching');
+  branchMapCard.classList.add('map-embedded');
   branchMapCard.insertAdjacentHTML('afterbegin',`
     <div class="map-identity" aria-hidden="true">
       <span class="map-pin">LW</span>
@@ -90,6 +90,17 @@ if(branchMapCard&&branchMap){
 }
 const mapBranchLabel=branchMapCard?.querySelector('[data-map-branch]');
 const mapLoadingLabel=branchMapCard?.querySelector('[data-map-loading-label]');
+let mapLoadTimer=0;
+const finishMapLoad=()=>{
+  window.clearTimeout(mapLoadTimer);
+  branchMapCard?.classList.remove('is-switching');
+};
+const beginMapLoad=()=>{
+  window.clearTimeout(mapLoadTimer);
+  branchMapCard?.classList.add('is-switching');
+  mapLoadTimer=window.setTimeout(finishMapLoad,5000);
+};
+beginMapLoad();
 const branchLocations=[
   {
     name:'Muhaisnah 4',
@@ -131,11 +142,11 @@ const selectBranch=index=>{
   if(mapBranchLabel)mapBranchLabel.textContent=branch.name;
   if(mapLoadingLabel)mapLoadingLabel.textContent=branch.name;
   branchMap.title=`Google Map showing ${branch.name} branch`;
-  branchMapCard.classList.add('is-switching');
+  beginMapLoad();
   branchMap.src=`https://www.google.com/maps?q=${encodeURIComponent(branch.query)}&output=embed`;
 };
 
-branchMap?.addEventListener('load',()=>branchMapCard.classList.remove('is-switching'));
+branchMap?.addEventListener('load',finishMapLoad);
 branchButtons.forEach((button,index)=>button.addEventListener('click',()=>selectBranch(index)));
 branchButtons.forEach((button,index)=>button.setAttribute('aria-pressed',String(index===0)));
 
