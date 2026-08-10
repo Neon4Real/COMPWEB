@@ -489,6 +489,44 @@ body[data-ambient="locations"] { --ambient-a: #ff7b48; --ambient-b: #ffcf8c; }
 }
 @keyframes video-logo-scan { from { transform: translateY(0); } to { transform: translateY(105px); } }
 
+/* Ordered console family: PlayStation, Xbox, then handheld. */
+.console-stage .ps5-product {
+  z-index: 2 !important;
+  width: min(32vw, 440px);
+  height: 535px;
+  left: -1%;
+}
+
+.console-stage .xbox-product {
+  z-index: 3 !important;
+  width: min(18vw, 245px);
+  height: 395px;
+  right: auto;
+  left: 48%;
+  transform: translateX(-50%);
+}
+
+.console-stage .handheld-product {
+  z-index: 4 !important;
+  width: min(29vw, 405px);
+  height: 270px;
+  right: -2%;
+  bottom: 9%;
+  filter: drop-shadow(0 25px 34px #16203c42);
+}
+
+.console-stage:hover .ps5-product {
+  transform: translateY(-9px) scale(1.015);
+}
+
+.console-stage:hover .xbox-product {
+  transform: translateX(-50%) translateY(-9px) scale(1.015);
+}
+
+.console-stage:hover .handheld-product {
+  transform: translateY(-9px) scale(1.025);
+}
+
 @media (max-width: 720px) {
   .cinematic-hero {
     min-height: 780px;
@@ -516,6 +554,9 @@ body[data-ambient="locations"] { --ambient-a: #ff7b48; --ambient-b: #ffcf8c; }
   .cinematic-actions { width: 100%; }
   .cinematic-actions a { width: min(100%, 330px); }
   .ambient-orb { width: 100vw; opacity: .05; }
+  .console-stage .ps5-product { width: 270px; height: 380px; left: -8%; }
+  .console-stage .xbox-product { width: 145px; height: 280px; left: 51%; }
+  .console-stage .handheld-product { width: 245px; height: 165px; right: -5%; bottom: 7%; }
 }
 
 @media (prefers-reduced-motion: reduce) {
