@@ -1,0 +1,37 @@
+/* Reliability overrides for embedded Google Maps on mobile browsers. */
+.visit-section {
+  content-visibility: visible !important;
+}
+
+.map-card.map-embedded.is-switching iframe {
+  filter: saturate(.55);
+  transform: scale(1.01);
+}
+
+@media (max-width: 720px) {
+  .map-card {
+    height: 360px;
+  }
+
+  .map-card.map-embedded.is-switching iframe {
+    filter: none;
+    transform: none;
+  }
+
+  .map-identity {
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    background: rgba(255, 255, 255, .96);
+  }
+
+  .map-loading {
+    background: linear-gradient(145deg, rgba(248, 248, 250, .96), rgba(237, 237, 241, .96));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .map-card.map-embedded iframe,
+  .map-loading {
+    transition: none;
+  }
+}
