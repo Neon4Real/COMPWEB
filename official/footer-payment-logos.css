@@ -1,16 +1,20 @@
 .footer-payments > div.footer-payment-logos {
   display: grid;
-  grid-template-columns: repeat(5, 44px);
+  grid-template-columns: repeat(5, minmax(0, 1fr));
   align-items: center;
-  gap: 7px;
-  max-width: none;
+  justify-items: center;
+  gap: 6px;
+  width: 100%;
+  max-width: 220px;
   margin-top: 11px;
 }
 
 .footer-payment-logos .footer-pay-logo {
   display: grid !important;
   place-items: center;
-  width: 44px;
+  width: 100%;
+  max-width: 44px;
+  min-width: 0;
   height: 28px;
   margin: 0 !important;
   padding: 5px !important;
@@ -52,11 +56,6 @@
 
 @media (max-width: 720px) {
   .footer-payments > div.footer-payment-logos {
-    grid-template-columns: repeat(5, 42px);
-    gap: 7px;
-  }
-
-  .footer-payment-logos .footer-pay-logo {
-    width: 42px;
+    max-width: 220px;
   }
 }
