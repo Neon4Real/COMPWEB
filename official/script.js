@@ -11,7 +11,7 @@ if(originalHero){
     <div class="gaming-light green" aria-hidden="true"></div>
     <div class="gaming-light red" aria-hidden="true"></div>
     <div class="cinematic-content">
-      <p class="esports-kicker">Esports · custom gaming systems · Dubai</p>
+      <p class="esports-kicker">Mobile phones · accessories · gaming rigs · repairs</p>
       <div class="hero-liveworld-logo" aria-label="Live World Electronics Trading LLC">
         <span class="lw-symbol">LW</span>
         <span><strong>LIVE WORLD</strong><small>ELECTRONICS TRADING LLC</small></span>
