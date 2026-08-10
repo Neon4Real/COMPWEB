@@ -1,0 +1,62 @@
+.footer-payments > div.footer-payment-logos {
+  display: grid;
+  grid-template-columns: repeat(5, 44px);
+  align-items: center;
+  gap: 7px;
+  max-width: none;
+  margin-top: 11px;
+}
+
+.footer-payment-logos .footer-pay-logo {
+  display: grid !important;
+  place-items: center;
+  width: 44px;
+  height: 28px;
+  margin: 0 !important;
+  padding: 5px !important;
+  color: #242428 !important;
+  background: #fff;
+  border: 1px solid #e3e3e7;
+  border-radius: 7px;
+  box-shadow: 0 2px 7px #1a1a2108;
+}
+
+.footer-payment-logos .footer-pay-logo img {
+  display: block;
+  width: auto;
+  max-width: 34px;
+  height: 14px;
+  max-height: 16px;
+  margin: 0;
+  object-fit: contain;
+}
+
+.footer-payment-logos .footer-pay-logo:nth-last-child(-n + 2) img {
+  max-width: 36px;
+  max-height: 15px;
+}
+
+.footer-contactless svg {
+  width: 25px;
+  height: 18px;
+  fill: none;
+  stroke: #242428;
+  stroke-width: 2.15;
+  stroke-linecap: round;
+}
+
+.footer-contactless svg circle {
+  fill: #242428;
+  stroke: none;
+}
+
+@media (max-width: 720px) {
+  .footer-payments > div.footer-payment-logos {
+    grid-template-columns: repeat(5, 42px);
+    gap: 7px;
+  }
+
+  .footer-payment-logos .footer-pay-logo {
+    width: 42px;
+  }
+}
